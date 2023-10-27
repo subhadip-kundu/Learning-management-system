@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import userRoutes from './Routes/user.routes.js';
 import errorMiddleware from './Middleware/error.middleware.js';
+import courseRoutes from './Routes/course.route.js';
 
 // const cook
 
@@ -34,6 +35,9 @@ app.use('/ping', function (req, res) {
 //Other routes
 
 app.use('/api/v1/user', userRoutes);
+
+//course routes
+app.use('/api/v1/courses',courseRoutes);
 
 
 // Any random url which is not defined
