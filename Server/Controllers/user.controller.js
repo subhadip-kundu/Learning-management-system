@@ -131,7 +131,7 @@ const login = async (req, res, next) => {
 
 //Logic of Logout (The base logic of log out someone is delete the cookie againest it . So it will automatically logout user.)
 
-const logout = (req, res) => {
+const logout = (req, res, next) => {
 
     try {
         res.cookie('token', null, {
@@ -219,7 +219,7 @@ const forgotPassword = async (req, res, next) => {
 
 // Logic for reset password using link send by user email address
 
-const resetPassword = async (req, res) => {
+const resetPassword = async (req, res,next) => {
     const { resetToken } = req.params;
 
     const { password } = req.body;
@@ -257,7 +257,7 @@ const resetPassword = async (req, res) => {
 
 // Logic for change user password if password is remembered by user
 
-const changePassword = async (req, res) => {
+const changePassword = async (req, res,next) => {
     const { oldPassword, newPassword } = req.body;
     const { id } = req.user;
 
@@ -300,7 +300,7 @@ const changePassword = async (req, res) => {
 // Logic for update user profile
 
 
-const updateUser = async (req, res) => {
+const updateUser = async (req, res,next) => {
     const { fullName } = req.body;
     const { id } = req.user.id;
 

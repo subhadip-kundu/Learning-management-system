@@ -11,10 +11,22 @@ const isLoggedIn = async (req,res,next) =>{
 
     res.user = userDetails;
 
-    next();
+    next();  //It must call next() to pass control to the next middleware function
+}
+
+
+const authorizedRoles = (...roles) => async(req,res,next) =>{
+    const currentUserRole = req.user.role;
+    if(!roles.includes(currentUserRole)){
+        return next(
+            new AppError('You do not have permission to access this route',403)
+        )
+    }
+    next() //It must call next() to pass control to the next middleware function
 }
 
 
 export {
-    isLoggedIn
+    isLoggedIn,
+    authorizedRoles
 }
