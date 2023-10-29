@@ -1,13 +1,13 @@
 import AppError from "../Utils/error.util.js";
 
-const isLoggedIn = async (req,res,next) =>{
+const isLoggedIn = async (req, res, next) => {
     const { token } = req.cookies;
 
-    if(!token){
-        return next(new AppError('Unauthenticated, please log in again',400));
+    if (!token) {
+        return next(new AppError('Unauthenticated, please log in again', 400));
     }
 
-    const userDetails = await JsonWebTokenError.verify(token,process.env.JWT_SECRET);
+    const userDetails = await JsonWebTokenError.verify(token, process.env.JWT_SECRET);
 
     res.user = userDetails;
 
@@ -15,18 +15,34 @@ const isLoggedIn = async (req,res,next) =>{
 }
 
 
-const authorizedRoles = (...roles) => async(req,res,next) =>{
+const authorizedRoles = (...roles) => async (req, res, next) => {
     const currentUserRole = req.user.role;
-    if(!roles.includes(currentUserRole)){
+    if (!roles.includes(currentUserRole)) {
         return next(
-            new AppError('You do not have permission to access this route',403)
+            new AppError('You do not have permission to access this route', 403)
         )
     }
     next() //It must call next() to pass control to the next middleware function
 }
 
 
+
+const authorizeSubscriber = async (req, res, next) => {
+    const subscription = req.user.subscription;
+    const currentUserRole = req.user.role;
+
+    if(currentUserRole!== 'ADMIN' && subscription.status !== 'active'){
+        return next(
+            new AppError('You do not have permission to access this route', 403)
+        )
+    }
+
+    next();
+}
+
+
 export {
     isLoggedIn,
-    authorizedRoles
+    authorizedRoles,
+    authorizeSubscriber
 }

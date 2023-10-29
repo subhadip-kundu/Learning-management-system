@@ -1,4 +1,4 @@
-// import express from 'express';
+import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
@@ -7,8 +7,7 @@ import errorMiddleware from './Middleware/error.middleware.js';
 import courseRoutes from './Routes/course.route.js';
 import paymentsRoute from './Routes/payment.router.js';
 
-const app = require('express')();
-
+const app = express();
 
 
 //Middleware
