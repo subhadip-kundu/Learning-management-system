@@ -40,11 +40,14 @@ const userSchema = new Schema({
         default: 'USER'
     },
     forgotPasswordToken: String,
-    forgotPasswordExpirey: Date
-},
-    {
-        timestamps: true
-    });
+    forgotPasswordExpirey: Date,
+    subscription: {
+        id: String,
+        status: String
+    }
+}, {
+    timestamps: true
+});
 
 userSchema.pre('save', async function (next) {
     if (!this.isModified('password')) {

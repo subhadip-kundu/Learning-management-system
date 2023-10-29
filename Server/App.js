@@ -1,14 +1,14 @@
-import express from 'express';
+// import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import userRoutes from './Routes/user.routes.js';
 import errorMiddleware from './Middleware/error.middleware.js';
 import courseRoutes from './Routes/course.route.js';
+import paymentsRoute from './Routes/payment.router.js';
 
-// const cook
+const app = require('express')();
 
-const app = express();
 
 
 //Middleware
@@ -24,7 +24,7 @@ app.use(cors({
 
 app.use(cookieParser());
 
-app.use(morgan('dev'));  //To log which type of request are comming
+app.use(morgan('dev'));  //To log which type of request are comming 
 
 
 //Routes to check the server is up or not
@@ -34,10 +34,14 @@ app.use('/ping', function (req, res) {
 
 //Other routes
 
+//user routes
 app.use('/api/v1/user', userRoutes);
 
 //course routes
 app.use('/api/v1/courses',courseRoutes);
+
+//Payments routs
+app.use('/api/v1/payments',paymentsRoute);
 
 
 // Any random url which is not defined

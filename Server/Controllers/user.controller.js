@@ -1,4 +1,4 @@
-import user from "../Models/use.model.js";
+import user from "../Models/user.model.js";
 import AppError from "../Utils/error.util.js";
 import cloudinary from 'cloudinary';
 import fs from 'fs/promises';
