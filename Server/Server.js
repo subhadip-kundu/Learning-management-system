@@ -1,7 +1,7 @@
 import { config } from 'dotenv';
 config();
 
-// import app from './App.js';
+import app from './App.js';
 import connectionToDB from './Config/dbConnection.js';
 import cloudinary from 'cloudinary';
 import Razorpay  from 'razorpay';
@@ -29,11 +29,3 @@ app.listen(PORT,async()=>{
 });
 
 
-// (async () => {
-//     await connectionToDB();
-  
-//     app.listen(PORT, () => {
-//       console.log(`Running at : http://localhost:${PORT}`);
-//     });
-//   })();
-  
