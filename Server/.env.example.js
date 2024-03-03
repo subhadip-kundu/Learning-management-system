@@ -1,4 +1,6 @@
+# All af the format here
 NODE_ENV = development
+
 
 PORT = 5000
 
